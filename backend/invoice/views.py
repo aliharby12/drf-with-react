@@ -1,6 +1,7 @@
 from rest_framework.generics import *
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.throttling import UserRateThrottle
 
 from django.db import transaction
 
@@ -10,6 +11,7 @@ from invoice.serializer import *
 
 class ListAllInvoicesView(ListAPIView):
     serializer_class = InvoiceSerializer
+    throttle_classes = [UserRateThrottle]
 
     def get_queryset(self):
         return Invoice.objects.all()
