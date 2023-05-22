@@ -1,6 +1,6 @@
 from rest_framework.generics import *
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, filters
 from rest_framework.throttling import UserRateThrottle
 
 from django.db import transaction
@@ -12,9 +12,11 @@ from invoice.serializer import *
 class ListAllInvoicesView(ListAPIView):
     serializer_class = InvoiceSerializer
     throttle_classes = [UserRateThrottle]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ["description", "group__title", "item_name"]
 
     def get_queryset(self):
-        return Invoice.objects.all()
+        return Invoice.objects.all().order_by("-created_at")
     
 
 class InvoiceDetailsView(ListAPIView):
