@@ -16,7 +16,7 @@ class InvoiceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Invoice
-        exclude = ('id', 'invoice_number', 'created_at', 'updated_at')
+        exclude = ('id', 'updated_at')
         read_only_fields = ('uuid', 'invoice_number', 'group')
 
 
