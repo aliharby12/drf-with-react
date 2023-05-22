@@ -28,8 +28,7 @@ class InvoiceGroup(TimeStampedModel):
 
 
 class Invoice(TimeStampedModel):
-    invoice_number = models.PositiveIntegerField(
-        max_length=10, unique=True, editable=False)
+    invoice_number = models.PositiveIntegerField(unique=True, editable=False)
     description = models.TextField()
     group = models.ForeignKey(InvoiceGroup, on_delete=models.CASCADE)
     item_name = models.CharField(max_length=100)
