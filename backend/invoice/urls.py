@@ -1,10 +1,12 @@
 from django.urls import path
 
+from typing import *
+
 from invoice.views import *
 
-app_name = 'invoice'
+app_name: str = 'invoice'
 
-urlpatterns = [
+urlpatterns: List[path] = [
     path("all-invoices/", ListAllInvoicesView.as_view(), name="all-invoices"),
     path("invoice-detail/<uuid:inv_uuid>/",
          InvoiceDetailsView.as_view(), name="invoice-details"),
