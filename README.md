@@ -43,6 +43,9 @@ python3 manage.py runserver
 
 # run tests
 python3 manage.py test ./tests
+
+# run swagger
+http://127.0.0.1:8000/swagger
 ```
 
 ## To run the frontend
@@ -53,7 +56,7 @@ cd frontend
 npm install
 
 # run the frontend
-npm run
+npm start
 ```
 
 ## Features
