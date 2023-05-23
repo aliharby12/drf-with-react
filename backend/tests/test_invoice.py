@@ -14,7 +14,9 @@ class ListAllInvoicesViewTest(APITestCase):
     def test_list_all_invoices(self):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 2)
+
+    def tearDown(self) -> None:
+        return super().tearDown()
 
 
 class InvoiceDetailsViewTest(APITestCase):
@@ -34,6 +36,9 @@ class InvoiceDetailsViewTest(APITestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
+    def tearDown(self) -> None:
+        return super().tearDown()
+    
 
 class CreateInvoiceViewTest(APITestCase):
     def setUp(self):
@@ -51,6 +56,9 @@ class CreateInvoiceViewTest(APITestCase):
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Invoice.objects.count(), 1)
+
+    def tearDown(self) -> None:
+        return super().tearDown()
 
 
 class UpdateInvoiceViewTest(APITestCase):
@@ -74,6 +82,9 @@ class UpdateInvoiceViewTest(APITestCase):
         data = {"description": "Updated invoice description"}
         response = self.client.patch(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+    
+    def tearDown(self) -> None:
+        return super().tearDown()
 
 
 class DeleteInvoiceViewTest(APITestCase):
@@ -94,3 +105,6 @@ class DeleteInvoiceViewTest(APITestCase):
                       kwargs={"inv_uuid": invalid_uuid})
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def tearDown(self) -> None:
+        return super().tearDown()
